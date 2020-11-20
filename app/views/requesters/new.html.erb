@@ -1,0 +1,34 @@
+<% if @requester.errors.any? %>
+<% @requester.errors.full_messages.each do |message| %>
+  <div class='ls-alert-danger' role='alert'>
+    <%= message %>
+  </div>
+  <% end %>
+<% end %>
+
+<form>
+<%= form_with model: @requester, local: true do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :company_name, 'Razão social' %>
+      <%= f.text_field :company_name, class:'form-control', placeholder: 'razão social da empresa'  %>
+    </div>
+    <div class='form-group col-md-6'>
+      <%= f.label :cnpj, 'CNPJ' %>
+      <%= f.text_field :cnpj, class:'form-control', placeholder: 'CNPJ da Empresa'  %>
+    </div>
+    <div class='form-group col-md-6'>
+      <%= f.label :address, 'Endereço' %>
+      <%= f.text_field :address, class:'form-control', placeholder: 'Endereço da empresa'  %>
+    </div>
+    <div class='form-group col-md-6'>
+      <%= f.label :phone, 'Telefone' %>
+      <%= f.text_field :phone, class:'form-control', placeholder: 'Telefone da empresa'  %>
+    </div>
+  </div>
+    <div class='ls-actions-btn' >
+        <%= f.submit 'Salvar', class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Cancelar', url_for(:back), class:"btn btn-secondary btn-sm" %>
+    </div>
+<% end %>
+</form>

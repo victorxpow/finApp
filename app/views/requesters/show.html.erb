@@ -1,0 +1,52 @@
+<h2>Cliente</h2>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Razão Social</th>
+      <th>CNPJ</th>
+      <th>Endereço</th>
+      <th>Telefone</th>
+      <th>Valor Total do Emprestimo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @requester.company_name %></td>
+      <td><%= @requester.cnpj %></td>
+      <td><%= @requester.address %></td>
+      <td><%= @requester.phone %></td>
+      <td><% @requester.loans.each do |r| %>
+        <%= number_to_currency(r.value, locale: :br) %>
+      <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<% if @requester.loans.any? %>
+<h2>Emprestimo</h2>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Valor total</th>
+      <th>Taxa ao mês</th>
+      <th>Quantidade de meses</th>
+      <th>Valor da parcela</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @requester.loans.each do |r| %>
+      <td><%= number_to_currency(r.value, locale: :br) %></td>
+      <td><%= r.fee %></td>
+      <td><%= r.month.round %></td>
+      <td><%= number_to_currency(r.pmt, locale: :br) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<% else %>
+<%= link_to 'Solicitar emprestimo', new_requester_loan_path(@requester), class: "btn btn-primary btn-sm"  %>
+<% end %>
+<%= link_to 'Voltar', requesters_path, class: "btn btn-outline-secondary" %>

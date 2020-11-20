@@ -1,0 +1,28 @@
+<% if @loan.errors.any? %>
+<% @loan.errors.full_messages.each do |message| %>
+  <div class='ls-alert-danger' role='alert'>
+    <%= message %>
+  </div>
+  <% end %>
+<% end %>
+
+<%= form_with model: [@requester, @loan], local: true do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :value, 'Valor do emprestimo' %>
+      <%= f.text_field :value, class:'form-control', placeholder: 'Valor do emprestimo'  %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :fee, 'Taxa ao mês' %>
+      <%= f.text_field :fee, class:'form-control', placeholder: 'Taxa ao mês'  %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :month, 'Parcelas' %>
+      <%= f.text_field :month, class:'form-control', placeholder: 'Numero de parcelas'  %>
+    </div>
+  </div>
+    <div class='ls-actions-btn' >
+        <%= f.submit 'Salvar', class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Cancelar', url_for(:back), class:"btn btn-secondary btn-sm" %>
+    </div>
+<% end %>

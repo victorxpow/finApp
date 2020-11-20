@@ -1,0 +1,21 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Razão Social</th>
+      <th>CNPJ</th>
+      <th>Endereço</th>
+      <th>Telefone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requesters.each do |requester| %>
+      <tr id="requester-<%= requester.id %>">
+        <td><%= link_to requester.company_name, requester %></td>
+        <td><%= requester.cnpj %></td>
+        <td><%= requester.address %></td>
+        <td><%= requester.phone %></td>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Registrar Novo', new_requester_path, class: "btn btn-primary btn-sm"  %>
